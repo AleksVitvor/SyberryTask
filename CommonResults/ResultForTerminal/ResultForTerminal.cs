@@ -11,7 +11,7 @@ namespace CommonResults.ResultForTerminal
         public DayOfWeek DayOfWeek { get; set; }
         public override string ToString()
         {
-            return $"{Name}({Math.Round(DailyAverage, 2)})";
+            return $"{Name}({Math.Round(DailyAverage, 2)} hours),";
         }
     }
 }

@@ -1,12 +1,10 @@
 ﻿using CommonResults.ResultForTerminal;
 using DB.ResultModels;
 using DB.UnitOfWork.Interface;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Services.SearchService.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Services.SearchService.Service
 {
@@ -43,12 +41,15 @@ namespace Services.SearchService.Service
         public List<List<ResultForTerminal>> GetResultsOrderDays(IEnumerable<ResultForTerminal> results)
         {
             List<List<ResultForTerminal>> finalResult = new List<List<ResultForTerminal>>();
-            for (int i = 0; i < 7; i++)
+            for (int i = 1; i < 7; i++)
             {
                 var addingList = results.Where(u => u.DayOfWeek == (DayOfWeek)i).ToList();
-                addingList=addingList.OrderBy(u => u.DailyAverage).Reverse().ToList();
+                addingList=addingList.OrderByDescending(u => u.DailyAverage).ToList();
                 finalResult.Add(addingList);
             }
+            var addingListSunday = results.Where(u => u.DayOfWeek == (DayOfWeek)0).ToList();
+            addingListSunday = addingListSunday.OrderByDescending(u => u.DailyAverage).ToList();
+            finalResult.Add(addingListSunday);
             return finalResult;
         }
 
