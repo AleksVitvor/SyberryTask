@@ -25,7 +25,7 @@ namespace SyberryTaskCommon
                         Console.Write("{0, -25}", res[i]);
                     }
                     else if (i == 0 && i == res.Count - 1)
-                        Console.WriteLine("{0, -75}", res[i]);
+                        Console.WriteLine("{0, -75} |", res[i].ToString().Trim(','));
                     else if (i == 1 && i == res.Count - 1)
                         Console.WriteLine("{0, -50} |", res[i].ToString().Trim(','));
                     else
